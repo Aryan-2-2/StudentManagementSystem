@@ -34,7 +34,53 @@ spring.datasource.password=9038473989
 Spring Data JPA: 2
 ```
 
-##Admin Controller
+## Admin Controller
+```bash
+## Admit Student
+{
+   "student_Code" : 1,
+   "studentName" : "Aryan Jaiswal",
+   "email" : "aryanjaiswal5928@gmail.com",
+   "dateOfBirth" : "20/11/2000",
+   "gender" : "male",
+   "mobileNumber" : "6666666666",
+   "mothersName" : " Mrs Pramila Jaiswal" ,
+   "fathersName" :  "Mr Ramchandra Jaiswal"
+
+}
+
+##  Upload Course
+
+{
+    "courseName" : "JavaBackedDevelopment",
+    "description" : "full fledge course on backend development",
+    "courseType" : "full time",
+    "duration" : "6 months" ,
+    "topics" : "core java, hibernate, jdbc, spring security"
+}
+
+## Assign a Course to a Student
+http://localhost:8088/admin/assign/1/JavaBackedDevelopment
+```
+## Student Controller
+```bash
+
+##update student profile
+{
+   "student_Code" : 101,
+   "studentName" : "Aryan Jaiswal",
+   "email" : "aryanjaiswal5928@gmail.com",
+   "dateOfBirth" : "20/11/2000",
+   "gender" : "male",
+   "mobileNumber" : "7777777777",
+   "mothersName" : " Mrs Pramila Jaiswal" ,
+   "fathersName" :  "Mr Ramchandra Jaiswal"
+}
+
+##check for the assigned course
+http://localhost:8088/student/assignedcourses/gaurav
+```
+
 
 ## Running Tests
 Run the ![Screenshot_20221221_015619](https://user-images.githubusercontent.com/101566310/208862198-d90564ef-2141-4353-a6ed-2f2f1b239009.png)
