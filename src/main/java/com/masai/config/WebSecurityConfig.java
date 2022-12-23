@@ -30,8 +30,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
         .authorizeRequests()
 		.antMatchers("/admin/**").hasAnyRole("ADMIN","OWNER") 
 		.antMatchers("/student/**").hasAnyRole("USER","ADMIN","OWNER")
-		.antMatchers("/swagger-ui/","/**").permitAll()
-		.and().formLogin();
+		.antMatchers("/swagger-ui/","/**").permitAll();
+		
 		
 	}
 
