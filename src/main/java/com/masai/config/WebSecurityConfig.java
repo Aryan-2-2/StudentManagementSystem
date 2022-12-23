@@ -7,9 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.masai.utilities.CustomUserDetailsServiceImpl;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -20,23 +19,26 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 	private CustomUserDetailsServiceImpl customUserDetailsService;
 	
 	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(customUserDetailsService);
+	}
+	
+	
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-
-		http.authorizeRequests()
-		.antMatchers("/admin").hasRole("ADMIN") 
-		.antMatchers("/swagger-ui/","/user/create","/student/**").permitAll();
+		http.csrf().disable()
+        .authorizeRequests()
+		.antMatchers("/admin/**").hasAnyRole("ADMIN","OWNER") 
+		.antMatchers("/student/**").hasAnyRole("USER","ADMIN","OWNER")
+		.antMatchers("/swagger-ui/","/**").permitAll()
+		.and().formLogin();
 		
 	}
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailsService).passwordEncoder(this.passwordEncoder()) ; 
-	}
 	
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(12) ;
+	public PasswordEncoder getpasswordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 	
 }
