@@ -33,33 +33,28 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImp adminService;
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/admit/student")
 	ResponseEntity<String> admitStudent(@Valid @RequestBody Student student) throws StudentAlreadyExists{
 		   String message =  adminService.admitStudent(student);
 		   return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/upload/course")
 	ResponseEntity<String> uploadCourseDetails(@Valid @RequestBody Course course) throws CourseAlreadyExists{
 		   String message =  adminService.uploadCourseDetails(course);
 		   return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/assign/{studentCode}/{courseName}")
 	ResponseEntity<String> assignCourseToStudent(@Valid @PathVariable Integer studentCode,@PathVariable String courseName) throws StudentNotFound, CourseNotFound{
 		   String message =  adminService.assignCourseToStudent(studentCode, courseName);
 		   return new ResponseEntity<>(message,HttpStatus.ACCEPTED);
 	}
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/student/{studentName}")
 	ResponseEntity<Student> getStudentDetailsByStudentName(@PathVariable String studentName) throws StudentNotFound{
 		   Student student =  adminService.getStudentDetailsByStudentName(studentName);
 		   return new ResponseEntity<>(student,HttpStatus.ACCEPTED);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/students/{courseName}")
 	ResponseEntity<List<Student>> getStudentsByCourseName(@PathVariable String courseName)throws CourseNotFound, NoRecordFound{
 		   List<Student> students =  adminService.getStudentsByCourseName(courseName);

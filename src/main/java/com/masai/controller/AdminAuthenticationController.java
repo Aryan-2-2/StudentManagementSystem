@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.masai.entities.User;
+import com.masai.entities.Admin;
 import com.masai.exception.UserAlreadyExists;
-import com.masai.service.UserServiceImpl;
+import com.masai.service.AdminAuthenticationServiceImpl;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminAuthenticationController {
 
 	@Autowired
-	private UserServiceImpl userService;
+	private AdminAuthenticationServiceImpl adminAuthenticationServiceImpl;
 	
 	@PostMapping("/create")
-	ResponseEntity<String> saveUser(@RequestBody User user) throws UserAlreadyExists{
-		String message = userService.saveUser(user);
+	ResponseEntity<String> saveAdmin(@RequestBody Admin admin) throws UserAlreadyExists{
+		String message = adminAuthenticationServiceImpl.saveUser(admin);
 		return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
 	
