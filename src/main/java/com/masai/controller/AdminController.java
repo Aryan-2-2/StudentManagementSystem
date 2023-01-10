@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,29 +42,31 @@ public class AdminController {
 		   return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
 	
-	
+	@PostAuthorize("hasRole('ADMIN')")
 	@PostMapping("/admit/student")
 	ResponseEntity<String> admitStudent(@Valid @RequestBody Student student) throws StudentAlreadyExists{
 		   String message =  adminService.admitStudent(student);
 		   return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
-	
+	@PostAuthorize("hasRole('ADMIN')")
 	@PostMapping("/upload/course")
 	ResponseEntity<String> uploadCourseDetails(@Valid @RequestBody Course course) throws CourseAlreadyExists{
 		   String message =  adminService.uploadCourseDetails(course);
 		   return new ResponseEntity<>(message,HttpStatus.CREATED);
 	}
+	@PostAuthorize("hasRole('ADMIN')")
 	@PostMapping("/assign/{studentCode}/{courseName}")
 	ResponseEntity<String> assignCourseToStudent(@Valid @PathVariable Integer studentCode,@PathVariable String courseName) throws StudentNotFound, CourseNotFound{
 		   String message =  adminService.assignCourseToStudent(studentCode, courseName);
 		   return new ResponseEntity<>(message,HttpStatus.ACCEPTED);
 	}
+	@PostAuthorize("hasRole('ADMIN')")
 	@GetMapping("/student/{studentName}")
 	ResponseEntity<Student> getStudentDetailsByStudentName(@PathVariable String studentName) throws StudentNotFound{
 		   Student student =  adminService.getStudentDetailsByStudentName(studentName);
 		   return new ResponseEntity<>(student,HttpStatus.ACCEPTED);
 	}
-	
+	@PostAuthorize("hasRole('ADMIN')")
 	@GetMapping("/students/{courseName}")
 	ResponseEntity<List<Student>> getStudentsByCourseName(@PathVariable String courseName)throws CourseNotFound, NoRecordFound{
 		   List<Student> students =  adminService.getStudentsByCourseName(courseName);
