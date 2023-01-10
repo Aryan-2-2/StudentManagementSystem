@@ -15,7 +15,7 @@ import com.masai.repository.AdminAuthenticationRepository;
 public class CustomUserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
-	AdminAuthenticationRepository adminAuthenticationRepository;
+	private AdminAuthenticationRepository adminAuthenticationRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
