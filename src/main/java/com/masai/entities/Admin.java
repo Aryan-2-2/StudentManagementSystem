@@ -3,8 +3,12 @@ package com.masai.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -37,9 +41,10 @@ public class Admin implements UserDetails{
 	private String password;
 	
 	
-	
 	@NotNull(message = "role should not be null")
 	private String role;
+	
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,7 +63,7 @@ public class Admin implements UserDetails{
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

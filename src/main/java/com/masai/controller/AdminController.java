@@ -33,6 +33,15 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImp adminService;
 	
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/hello")
+	ResponseEntity<String> sayHello() throws StudentAlreadyExists{
+		   String message =  "hello";
+		   return new ResponseEntity<>(message,HttpStatus.CREATED);
+	}
+	
+	
 	@PostMapping("/admit/student")
 	ResponseEntity<String> admitStudent(@Valid @RequestBody Student student) throws StudentAlreadyExists{
 		   String message =  adminService.admitStudent(student);
