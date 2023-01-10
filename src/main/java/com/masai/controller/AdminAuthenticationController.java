@@ -22,7 +22,7 @@ public class AdminAuthenticationController {
 	@Autowired
 	private AdminAuthenticationServiceImpl adminAuthenticationServiceImpl;
 	
-	@PostAuthorize(value = "ADMIN")
+	@PostAuthorize("hasRole('ADMIN')")
 	@PostMapping("/admin")
 	ResponseEntity<String> saveAdmin(@Valid @RequestBody Admin admin) throws UserAlreadyExists{
 		String message = adminAuthenticationServiceImpl.saveUser(admin);
