@@ -7,6 +7,6 @@ import com.masai.entities.Admin;
 import com.masai.entities.Student;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, String>{
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
 
 }

@@ -15,7 +15,7 @@ import com.masai.repository.AdminAuthenticationRepository;
 public class AdminAuthenticationServiceImpl implements AdminAuthenticationServiceIntr{
 
 	@Autowired
-	AdminAuthenticationRepository adminAuthenticationRepository;
+	private AdminAuthenticationRepository adminAuthenticationRepository;
 	
 	@Override
 	public String saveUser(Admin admin) throws UserAlreadyExists{
